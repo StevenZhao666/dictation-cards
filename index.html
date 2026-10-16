@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MATH2003 Ch1–4 定理/定义默写卡（期中 10/25 用）</title>
+<link rel="stylesheet" href="katex/katex.min.css">
+<script src="katex/katex.min.js"></script>
+<style>
+:root{--bg:#111418;--card:#1b2027;--fg:#e8edf3;--mut:#9aa7b4;--acc:#4c9be8;--ok:#3fbf7f;--no:#e2604a;--bd:#2b323b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.7 system-ui,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:18px 16px 60px}
+h1{font-size:19px;margin:0 0 4px}
+.bar{position:sticky;top:0;background:linear-gradient(#111418,#111418ee);padding:10px 0 12px;border-bottom:1px solid var(--bd);margin-bottom:18px;z-index:5}
+.bar .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.stat{color:var(--mut);font-size:14px}
+.stat b{color:var(--fg)}
+button{background:#232a33;color:var(--fg);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 14px;font:inherit;font-size:15px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button[disabled]{opacity:.5;cursor:default}
+button.primary{background:#1d3a55;border-color:#2c6ea8}
+button.ok{background:#17362a;border-color:#2b6b4f}
+button.no{background:#3a211c;border-color:#7d3a2c}
+label.chk{color:var(--mut);font-size:14px;display:flex;gap:6px;align-items:center;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px 20px 16px}
+.num{color:var(--acc);font-size:15px;letter-spacing:.02em;margin-bottom:10px}
+.q{font-size:21px;font-weight:600;margin-bottom:18px}
+.ans{border-top:1px dashed var(--bd);margin-top:6px;padding-top:16px}
+.ans p{margin:.55em 0}
+.ans strong{color:#fff}
+.ans code{background:#0d1013;padding:1px 5px;border-radius:5px;font-size:.92em}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btns button{flex:1 1 auto;min-width:120px}
+.done{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:24px;text-align:center}
+.kbd{color:var(--mut);font-size:13px;margin-top:14px}
+.foot{color:var(--mut);font-size:13px;margin-top:22px}
+a{color:var(--acc)}
+/* ---- v2：默写输入 + AI 判定 ---- */
+.minebox{border-top:1px dashed var(--bd);margin-top:14px;padding-top:14px}
+.minebox label{display:block;color:var(--mut);font-size:14px;margin-bottom:8px}
+textarea{width:100%;background:#0d1013;color:var(--fg);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 12px;font:15px/1.6 ui-monospace,Consolas,"Cascadia Mono",monospace;resize:vertical;min-height:104px}
+textarea:focus{outline:none;border-color:var(--acc)}
+.ai{border-top:1px dashed var(--bd);margin-top:18px;padding-top:16px}
+.aihead{display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;margin-bottom:10px}
+.aihead b{font-size:15px}
+.aiout{background:#0d1013;border:1px solid var(--bd);border-left:3px solid var(--acc);border-radius:10px;
+  padding:12px 14px;margin:12px 0;font-size:15.5px}
+.aiout p{margin:.45em 0}
+.warn{color:#e2b34a}
+.oktxt{color:var(--ok)}
+.notxt{color:var(--no)}
+details.cfg{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 16px;margin-top:18px}
+details.cfg summary{cursor:pointer;color:var(--mut);font-size:15px}
+details.cfg .grid{display:grid;gap:10px;margin-top:12px}
+details.cfg label{font-size:14px}
+details.cfg input[type=text],details.cfg input[type=password]{width:100%;background:#0d1013;color:var(--fg);
+  border:1px solid var(--bd);border-radius:9px;padding:9px 11px;font:14px/1.5 ui-monospace,Consolas,monospace}
+details.cfg small{color:var(--mut);font-size:13px;display:block;margin-top:4px}
+.preview{margin-top:10px}
+.preview img{max-width:100%;max-height:280px;border-radius:10px;border:1px solid var(--bd)}
+/* ---- v3：LaTeX 编辑框 + 默写实时预览 ---- */
+.texwrap{margin:6px 0 0}
+.texwrap summary{cursor:pointer;color:var(--mut);font-size:14px}
+.texwrap summary:hover{color:var(--acc)}
+.texbox{background:#0d1013;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin-top:8px}
+.texbtns{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
+.texbtns button{padding:4px 8px;font:13.5px/1.3 ui-monospace,Consolas,"Cascadia Mono",monospace;
+  background:#12181d;border-radius:7px;min-width:0}
+.texbtns button:hover{border-color:var(--acc);color:var(--acc)}
+#texSrc{min-height:46px;font:15px/1.6 ui-monospace,Consolas,"Cascadia Mono",monospace}
+.texpv{margin-top:8px;padding:8px 10px;background:#12181d;border:1px solid var(--bd);border-radius:8px;
+  min-height:44px;display:flex;align-items:center;gap:8px;overflow-x:auto;flex-wrap:wrap}
+.texpv .tag{color:var(--mut);font-size:12.5px;flex:0 0 auto}
+.hint{color:var(--mut);font-size:13px}
+.minepv{margin-top:8px;padding:10px 12px;background:#0d1013;border:1px dashed var(--bd);border-radius:10px;font-size:15.5px}
+.minepv p{margin:.45em 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <h1>MATH2003 Ch1–4 定理/定义默写卡（期中 10/25 用）</h1>
+    <div class="row" style="margin-top:8px">
+      <span class="stat" id="stat"></span>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <label class="chk"><input type="checkbox" id="onlyFailed"> 只抽 ✗ 的</label>
+      <span class="stat" id="storageWarn" hidden style="color:#e2b34a">⚠ 此浏览器禁止本地存储，进度只在本次打开期间有效</span>
+      <button id="again">重新打乱 / 再来一轮</button>
+      <button id="reset">清空记录</button>
+    </div>
+  </div>
+  <div class="card" id="card">
+    <div class="num" id="num"></div>
+    <div class="q" id="q"></div>
+
+    <div class="minebox">
+      <label for="mine">① 我的默写（写 LaTeX 也行、写英文句子也行；先写完再看答案）</label>
+      <details class="texwrap" id="texWrap">
+        <summary>∑ LaTeX 编辑框（点开：手打 LaTeX，下面实时预览，拼好插入默写框）</summary>
+        <div class="texbox">
+          <div class="texbtns">
+            <button data-tex="\frac{}{}">分式</button>
+            <button data-tex="\sqrt{}">根号</button>
+            <button data-tex="^{}">上标</button>
+            <button data-tex="_{}">下标</button>
+            <button data-tex="\lim_{n \to \infty}">lim</button>
+            <button data-tex="\sum_{n=1}^{\infty}">∑</button>
+            <button data-tex="\forall">∀</button>
+            <button data-tex="\exists">∃</button>
+            <button data-tex="\in">∈</button>
+            <button data-tex="\le">≤</button>
+            <button data-tex="\ge">≥</button>
+            <button data-tex="\ne">≠</button>
+            <button data-tex="\to">→</button>
+            <button data-tex="\Rightarrow">⇒</button>
+            <button data-tex="\varepsilon">ε</button>
+            <button data-tex="\delta">δ</button>
+            <button data-tex="\infty">∞</button>
+            <button data-tex="\mid">|</button>
+          </div>
+          <textarea id="texSrc" rows="2" placeholder="直接打 LaTeX，如 \frac{a_n}{b_n} \to 0（不用写 $；其余符号手打即可）"></textarea>
+          <div class="texpv" id="texPv"><span class="tag">预览</span><span id="texPvBody"><span class="hint">拼好的公式会显示在这里</span></span></div>
+          <div class="btns">
+            <button class="primary" id="texToMine">插入到默写框</button>
+            <button id="texClear">清空</button>
+          </div>
+        </div>
+      </details>
+      <textarea id="mine" rows="4" placeholder="例：$S$ is finite if ...（想手写的话跳过这里，直接拍下面那张图）"></textarea>
+      <div class="minepv" id="minePv" hidden></div>
+      <div class="btns"><button class="primary" id="show">② 显示答案并对照（空格）</button></div>
+    </div>
+
+    <div class="ans" id="ans" hidden></div>
+
+    <div class="ai" id="ai" hidden>
+      <div class="aihead">
+        <b>③ AI 判定</b>
+        <span class="stat" id="aiMsg"></span>
+      </div>
+      <div class="aiout" id="aiOut" hidden></div>
+      <div class="btns">
+        <button class="primary" id="aiGo">让 AI 判一下</button>
+        <button id="aiImg">手写拍照 / 选图判定</button>
+        <button id="copyP">复制给 AI（手动）</button>
+      </div>
+      <input type="file" id="fileImg" accept="image/*" capture="environment" hidden>
+      <div class="preview"><img id="thumb" hidden alt="手写默写"></div>
+      <div style="margin-top:14px">
+        <label for="aiPaste" class="stat">把 AI 的答复贴到这里 → 保存（以后抽到这张卡会自动显示）</label>
+        <textarea id="aiPaste" rows="3" style="margin-top:8px" placeholder="结论：…&#10;漏掉的要点：…&#10;写错的地方：…&#10;提醒：…"></textarea>
+        <div class="btns"><button id="aiSave">保存判定</button></div>
+      </div>
+
+      <details class="cfg">
+        <summary>⚙ AI 设置（选填）—— key 只存在这台设备的浏览器里，不会写进这个 html 文件</summary>
+        <div class="grid">
+          <div>
+            <label for="cfgKey">API key（DeepSeek）</label>
+            <input type="password" id="cfgKey" placeholder="sk-...">
+            <small>不填也能用「复制给 AI」那条路。发给同学/老师的文件里不含 key；换设备要重填一次。</small>
+          </div>
+          <div>
+            <label for="cfgBase">API 地址</label>
+            <input type="text" id="cfgBase">
+          </div>
+          <div>
+            <label for="cfgModel">模型</label>
+            <input type="text" id="cfgModel">
+            <small>文字判定和手写照片都用它。2026-10-14 实测这个 key 可用的只有 deepseek-flash 与 deepseek-v4-pro。</small>
+          </div>
+          <div>
+            <label class="chk"><input type="checkbox" id="cfgThink"> 深度思考（默认关：快、省、够用；判不准或手写照片潦草时再打开）</label>
+          </div>
+          <div class="btns">
+            <button id="saveCfg">保存设置</button>
+            <button id="testCfg">测试连接</button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="btns" id="acts" hidden>
+      <button class="ok" data-r="ok">✓ 过了（1）</button>
+      <button class="no" data-r="no">✗ 没过（2）</button>
+      <button data-r="skip">跳过（3）</button>
+    </div>
+  </div>
+  <div class="done" id="done" hidden>
+    <div id="doneMsg" style="font-size:18px"></div>
+    <div class="btns" style="justify-content:center;margin-top:18px">
+      <button class="primary" id="again2">再来一轮</button>
+      <button id="fallback" hidden>取消「只抽 ✗ 的」，抽全部</button>
+    </div>
+  </div>
+  <div class="kbd">键盘：空格/回车 = 显示答案　1 = 过了　2 = 没过　3 = 跳过（手机直接点按钮）<br>
+  默写内容和 AI 判定都存在本机浏览器，换设备不同步。</div>
+  <div class="foot">来源：17-默写卡-Ch1-4.md　·　改了卡片 md 后重跑 <code>_build_默写卡自测.py</code> 即更新</div>
+</div>
+<script>
+const CARDS = [{"id": "01", "t": "01 · 1.3.1 有限集 / 无限集", "q": "什么叫一个集合有 $n$ 个元素？什么叫有限？", "a": "**English.** (a) The empty set $\\emptyset$ has $0$ elements. (b) If $n\\in\\mathbb{N}$, a set $S$ has $n$ elements if there exists a **bijection** from $\\mathbb{N}_n:=\\{1,\\dots,n\\}$ **onto** $S$. (c) $S$ is **finite** if it is either empty or has $n$ elements for some $n\\in\\mathbb{N}$；否则称为 **infinite**。\n**中文.** 有限 = 与某个 $\\{1,\\dots,n\\}$ 之间存在**双射**（既单射又满射）。\n**易错.** 判\"有限\"必须给出双射；含糊说\"数得完\"不给分。`Common mistakes in Homework 13.pdf` 讲的就是这类单射/满射写不清的扣分。"}, {"id": "02", "t": "02 · 1.3.6 可列 / 可数 / 不可数", "q": "说出条件与结论（英文原文）。", "a": "**English.** (a) $S$ is **denumerable** (countably infinite) if there exists a bijection of $\\mathbb{N}$ **onto** $S$. (b) $S$ is **countable** if it is either finite or denumerable. (c) $S$ is **uncountable** if it is not countable.\n**中文.** 可列 = 能与 $\\mathbb{N}$ 一一对应（可以\"排成一个无穷序列\"）；**可数 = 有限或可列**。\n**易错.** countable 包含有限情形——把 countable 等同于 denumerable 是期中常见的定义性错误。"}, {"id": "03", "t": "03 · 1.3.10 可数性的三个等价条件", "q": "说出条件与结论（英文原文）。", "a": "**English.** TFAE: (a) $S$ is countable. (b) There exists a **surjection** of $\\mathbb{N}$ onto $S$. (c) There exists an **injection** of $S$ into $\\mathbb{N}$.\n**用法.** 证\"可数\"最常用 (c)：给 $S$ 的每个元素编一个（不冲突的）自然数编号即可；讲义推论：$\\mathbb{Q}$ 可数（用对角表把 $\\mathbb{Q}$ 排成序列）。"}, {"id": "04", "t": "04 · 2.1.2 域公理的推论", "q": "说出条件与结论（英文原文）。", "a": "**English.** (a) If $z,a\\in\\mathbb{R}$ with $z+a=a$, then $z=0$. (b) If $u,b\\in\\mathbb{R}$, $b\\neq0$, with $u\\cdot b=b$, then $u=1$. (c) If $a\\in\\mathbb{R}$, then $a\\cdot0=0$.\n**用法.** 一切\"加/乘的消去\"都靠它逐条引用公理 (A1)–(A4) 推；MATH2003 A2 第 1 题（$a+b=0\\Rightarrow b=-a$）就是这个套路。\n**易错.** 每一步都要写\"由 (A2)/(A4)\"，别跳步——老师的旧解答里每条都标公理编号。"}, {"id": "05", "t": "05 · 2.1.6 序的定义", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $a,b\\in\\mathbb{R}$. (a) If $a-b\\in P$ (the set of positive reals), we write $a>b$ or $b<a$. (b) If $a-b\\in P\\cup\\{0\\}$, we write $a\\geq b$ or $b\\leq a$.\n**用法.** 序公理 (O1)–(O4) + 域公理 = $\\mathbb{R}$ 的\"代数–序\"兼容性（如 $a<b\\Rightarrow a+c<b+c$）的来源。"}, {"id": "06", "t": "06 · 2.2.1 绝对值 + 2.2.4 三角不等式", "q": "说出条件与结论（英文原文）。", "a": "**English (2.2.1).** $\\lvert a\\rvert:=a$ if $a>0$; $\\lvert a\\rvert:=0$ if $a=0$; $\\lvert a\\rvert:=-a$ if $a<0$.\n**English (2.2.4).** If $a,b\\in\\mathbb{R}$, then (a) $\\bigl\\lvert\\lvert a\\rvert-\\lvert b\\rvert\\bigr\\rvert\\leq\\lvert a-b\\rvert$, (b) $\\lvert a-b\\rvert\\leq\\lvert a\\rvert+\\lvert b\\rvert$.\n**用法.** ε 论证里几乎所有放缩都靠它（4.1.5 的唯一性证明、3.2.2 的有界性证明）。"}, {"id": "07", "t": "07 · 2.2.7 ε-邻域", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $a\\in\\mathbb{R}$, $\\varepsilon>0$. The $\\varepsilon$-**neighborhood** of $a$ is $V_\\varepsilon(a):=\\{x\\in\\mathbb{R}:\\lvert x-a\\rvert<\\varepsilon\\}$；等价于 $a-\\varepsilon<x<a+\\varepsilon$。\n**易错.** 是**严格**小于 ⇒ 端点 $a\\pm\\varepsilon$ **不在**邻域里；$\\varepsilon>0$ 必须写。"}, {"id": "08", "t": "08 · 2.3.1 上界 / 下界", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $S$ be a nonempty subset of $\\mathbb{R}$. (a) $S$ is **bounded above** if there exists $u\\in\\mathbb{R}$ with $s\\leq u$ for all $s\\in S$; each such $u$ is an **upper bound** of $S$. (b) $S$ is **bounded below** if there exists $w\\in\\mathbb{R}$ with $w\\leq s$ for all $s\\in S$; each such $w$ is a **lower bound**.\n**易错.** 上界**不必属于** $S$，也**不唯一**（所有更大的数都是上界）。"}, {"id": "09", "t": "09 · 2.3.2 sup / inf", "q": "说出条件与结论（英文原文）。", "a": "**English.** (a) If $S$ is bounded above, a number $u$ is a **supremum (least upper bound)** of $S$ if (1) $u$ is an upper bound of $S$, and (2) if $v$ is any upper bound of $S$, then $u\\leq v$. (b) 对下界的对偶定义给出 **infimum (greatest lower bound)**。\n**用法.** 写\"$\\sup S$\"前必须先说明 $S$ 非空**且有上界**（否则谈不上，见卡 11）。"}, {"id": "10", "t": "10 · 2.3.3–2.3.4 sup 的 ε-刻画", "q": "说出条件与结论（英文原文）。", "a": "**English.** $u=\\sup S$ $\\iff$ $u$ 是 $S$ 的上界，且 **for every $\\varepsilon>0$ there exists $s\\in S$ such that $u-\\varepsilon<s$**。对偶地，$w=\\inf S$ $\\iff$ $w$ 是下界，且 $\\forall\\varepsilon>0\\ \\exists s\\in S,\\ s<w+\\varepsilon$。\n**用法.** 证明\"某数就是 sup\"时的标准两段：① 是上界 ② 任意 $\\varepsilon$ 都能被某个元素顶上去。旧作业 A3（求 $S=\\{1-(-1)^n/(2n)\\}$ 的 sup/inf）就靠这条。"}, {"id": "11", "t": "11 · 2.3.6 完备性公理 ★", "q": "说出条件与结论（英文原文）。", "a": "**English.** **The Completeness Property of $\\mathbb{R}$:** Every nonempty set of real numbers that has an upper bound also has a supremum in $\\mathbb{R}$. (Also called the **Supremum Property**; the analogous property for infima follows.)\n**中文.** 非空**有上界**的实数集必有**上确界**。\n**用法 / 必记.** 这是本课**唯一\"凭空给出\"的性质**（公理），不能由别的定理推出；Ch3 的单调收敛定理、BW、Cauchy 判据全部建立在它上面。\n**易错（考过）.**\n- 三个条件缺一不可：非空、有上界、**在 $\\mathbb{R}$ 中**；\n- 在 $\\mathbb{Q}$ 中它**不成立**：$S=\\{x\\in\\mathbb{Q}:x^2<2\\}$ 在 $\\mathbb{Q}$ 里没有 sup；\n- 不要写成\"有界集必有 sup\"——$S=\\{x:x<0\\}$ 有上界但**下界**不存在。"}, {"id": "12", "t": "12 · 2.4.3 阿基米德性质", "q": "说出条件与结论（英文原文）。", "a": "**English.** If $x\\in\\mathbb{R}$, then there exists $n_x\\in\\mathbb{N}$ such that $x\\leq n_x$（即 $\\mathbb{N}$ 在 $\\mathbb{R}$ 中**无上界**）。\n**证明骨架.** 反证：若 $\\forall n,\\ n\\leq x$，则 $x$ 是 $\\mathbb{N}$ 的上界 ⇒ 由 2.3.6 得 $u:=\\sup\\mathbb{N}$ ⇒ $u-1$ 不是上界 ⇒ $\\exists k\\in\\mathbb{N},\\ u-1<k$ ⇒ $u<k+1\\in\\mathbb{N}$，矛盾。$\\blacksquare$\n**常用推论（背下来）.** 对任意 $\\varepsilon>0$ 存在 $n\\in\\mathbb{N}$ 使 $\\frac1n<\\varepsilon$（把 $x=\\frac1\\varepsilon$ 代进去）——\"用 $\\frac1n$ 代替 $\\varepsilon$\"是分析里的标准手法（聚点 4.1.2 的证明就用它）。"}, {"id": "13", "t": "13 · 2.4.8 稠密性定理", "q": "说出条件与结论（英文原文）。", "a": "**English.** If $x,y\\in\\mathbb{R}$ with $x<y$, then there exists a rational number $r\\in\\mathbb{Q}$ such that $x<r<y$。（对无理数同理。）\n**用法.** ① 造\"有理序列逼近\"；② 说明 $[0,1]\\cap\\mathbb{Q}$ 的聚点是整个 $[0,1]$（4.1.3(e)）。\n**证明思路.** 先用阿基米德性质（推论 2.4.5）取 $n$ 使 $\\frac1n<y-x$，再取最小的 $m$ 使 $x<\\frac mn$。"}, {"id": "14", "t": "14 · 2.5.1 区间的特征定理", "q": "说出条件与结论（英文原文）。", "a": "**English.** If $S\\subseteq\\mathbb{R}$ contains at least two points and satisfies: if $x,y\\in S$ with $x<y$ then $[x,y]\\subseteq S$，then $S$ is an **interval**。\n**用途.** 把\"看起来像区间\"的集合严格认定为区间（含端点开闭的四种情形），后面 Ch5 的介值定理要用。"}, {"id": "15", "t": "15 · 2.5.2 嵌套区间性质", "q": "说出条件与结论（英文原文）。", "a": "**English.** If $I_n=[a_n,b_n]$, $n\\in\\mathbb{N}$, is a nested sequence of **closed and bounded** intervals, then there exists $\\xi\\in\\mathbb{R}$ such that $\\xi\\in I_n$ for all $n$。\n**易错（爱考）.** **\"闭\"不能换成开**：$I_n=(0,\\frac1n)$ 交集为空；**\"有界\"也不能去掉**：$I_n=[n,\\infty)$ 交集为空。\n**用法.** 是 BW 定理（卡 23）二分法证明的核心工具；旧 A3/A5 的嵌套区间递推题走的就是它。"}, {"id": "16", "t": "16 · 2.5.4 / 2.5.5 $\\mathbb{R}$ 与 $[0,1]$ 不可数", "q": "说出条件与结论（英文原文）。", "a": "**English.** (2.5.4) The set $\\mathbb{R}$ of real numbers is not countable. (2.5.5) The unit interval $[0,1]$ is not countable.\n**证明骨架（对角线法）.** 反证：把 $[0,1)$ 里的数排成 $x_1,x_2,\\dots$，用二进制写 $x_n=0.b_{n1}b_{n2}\\cdots$；定义 $y:=0.y_1y_2\\cdots$，其中 $y_n:=1$ if $b_{nn}=0$, $y_n:=0$ if $b_{nn}=1$ ⇒ $y$ 与每个 $x_n$ 在第 $n$ 位不同 ⇒ $y\\notin$ 该枚举，矛盾。$\\blacksquare$\n**易错.** 二进制展开**不唯一**（$0.1=0.0111\\cdots$），教材用\"存在 $m>n$ 使 $b_m=0$\"的约定来消除歧义——答题时提一句这个约定才严密。"}, {"id": "17", "t": "17 · 3.1.3 数列收敛的 ε-K 定义 ★", "q": "说出条件与结论（英文原文）。", "a": "**English.** A sequence $X=(x_n)$ in $\\mathbb{R}$ is said to **converge** to $x\\in\\mathbb{R}$ if for every $\\varepsilon>0$ there exists a natural number $K(\\varepsilon)$ such that for all $n\\geq K(\\varepsilon)$, the terms $x_n$ satisfy $\\lvert x_n-x\\rvert<\\varepsilon$.\n**中文.** $\\forall\\varepsilon>0,\\ \\exists K(\\varepsilon)\\in\\mathbb{N},\\ n\\geq K\\Rightarrow\\lvert x_n-x\\rvert<\\varepsilon$。\n**易错.** ① $K$ 可以依赖 $\\varepsilon$，**不能依赖 $n$**；② 是\"从某一项**以后**（ultimately）\"全部成立，不是\"存在无穷多项\"；③ 别把 $\\varepsilon$ 写成固定的小数（如 $0.001$）。"}, {"id": "18", "t": "18 · 3.1.5 收敛的四个等价刻画", "q": "说出条件与结论（英文原文）。", "a": "**English.** TFAE: (a) $X$ converges to $x$. (b) $\\forall\\varepsilon>0\\ \\exists K:\\ n\\geq K\\Rightarrow\\lvert x_n-x\\rvert<\\varepsilon$. (c) **Geometric:** $\\forall\\varepsilon>0\\ \\exists K:\\ n\\geq K\\Rightarrow x-\\varepsilon<x_n<x+\\varepsilon$. (d) **Neighborhood:** $\\forall\\varepsilon>0\\ \\exists K:\\ n\\geq K\\Rightarrow x_n\\in V_\\varepsilon(x)$.\n**用法.** 做题时按需要换形态：要画图用 (c)，要与 Ch4 接轨用 (d)。"}, {"id": "19", "t": "19 · 3.2.2 收敛 ⇒ 有界", "q": "说出条件与结论（英文原文）。", "a": "**English.** A convergent sequence of real numbers is bounded.\n**证明骨架.** 取 $\\varepsilon=1$ ⇒ 存在 $K$ 使 $n\\geq K$ 时 $\\lvert x_n-x\\rvert<1$ ⇒ 三角不等式 $\\lvert x_n\\rvert<1+\\lvert x\\rvert$；再令 $M:=\\sup\\{\\lvert x_1\\rvert,\\dots,\\lvert x_{K-1}\\rvert,\\ 1+\\lvert x\\rvert\\}$，则 $\\forall n,\\ \\lvert x_n\\rvert\\leq M$。$\\blacksquare$\n**易错.** 最后那步用 **sup**（板书可能写 max——有限集时两者相等，不影响）；逆命题**不成立**（$(-1)^n$ 有界但不收敛）。"}, {"id": "20", "t": "20 · 3.2.3 极限四则运算 / 3.2.5 保序", "q": "说出条件与结论（英文原文）。", "a": "**English (3.2.3).** If $X\\to x$, $Y\\to y$ and $c\\in\\mathbb{R}$, then $X+Y\\to x+y$, $X-Y\\to x-y$, $X\\cdot Y\\to xy$, $cX\\to cx$；若 $Y$ 的项非零且 $y\\neq0$，则 $X/Y\\to x/y$。\n**English (3.2.5).** If $X,Y$ converge and $x_n\\leq y_n$ for all $n$, then $\\lim x_n\\leq\\lim y_n$。\n**易错.** 3.2.5 是**保序**（$\\leq$ 不会变成 $<$）；商的公式要求**分母极限非零**。"}, {"id": "21", "t": "21 · 3.3.2 单调收敛定理", "q": "说出条件与结论（英文原文）。", "a": "**English.** A monotone sequence of real numbers is convergent **if and only if** it is bounded. Further: (a) if it is increasing and bounded above, it converges to $\\sup\\{x_n:n\\in\\mathbb{N}\\}$; (b) if it is decreasing and bounded below, it converges to $\\inf\\{x_n:n\\in\\mathbb{N}\\}$.\n**为什么重要.** 这是**第一个真正用到完备性 2.3.6** 的定理（sup 存在 ⇒ 用它作极限），后面 BW、Cauchy 判据都靠它。\n**用法.** 遇到递推定义的序列（如 $x_{n+1}=\\sqrt{3+2x_n}$）：① 归纳证有界 ② 证单调 ③ 令 $x=\\lim$ 解方程。"}, {"id": "22", "t": "22 · 3.4.7 单调子列定理", "q": "说出条件与结论（英文原文）。", "a": "**English.** If $X=(x_n)$ is a sequence of real numbers, then there is a **subsequence** of $X$ that is monotone.\n**证明工具.** \"peak\"（峰值项）：若 $X$ 有无穷多个 peak，则它们构成单调递减子列；否则从某个下标起每项后面都有更大的项，可归纳构造单调递增子列。\n**用途.** 与 3.3.2 合起来给出 BW 的第一种证明。"}, {"id": "23", "t": "23 · 3.4.8 波尔查诺–魏尔斯特拉斯定理", "q": "说出条件与结论（英文原文）。", "a": "**English.** A bounded sequence of real numbers has a convergent subsequence.\n**两条证法（都要会）.** ① 3.4.7 + 3.3.2：单调子列 + 有界 ⇒ 收敛。② **嵌套区间二分法**（Lab #5 讲的那条）：把有界项装进 $[a_1,b_1]$，每次二分取含无穷多项的那一半，得嵌套闭区间 ⇒ 由 2.5.2 得 $\\xi$，再用 3.1.9（子列）证明它收敛到 $\\xi$。\n**易错.** 有界**不可去**（$x_n=n$ 无收敛子列）；结论只保证\"存在子列\"。"}, {"id": "24", "t": "24 · 3.4.9 子列全收敛 ⇒ 原列收敛", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $X=(x_n)$ be a **bounded** sequence and $x\\in\\mathbb{R}$ such that **every** convergent subsequence of $X$ converges to $x$. Then $X$ converges to $x$.\n**用法.** 证某个序列收敛但直接算不出来时的迂回路线（假设不收敛 ⇒ 由 BW 取一条收敛子列到别的值 ⇒ 矛盾）。"}, {"id": "25", "t": "25 · 3.5.1 Cauchy 列 + 3.5.3 / 3.5.4", "q": "说出条件与结论（英文原文）。", "a": "**English (3.5.1).** $X=(x_n)$ is a **Cauchy sequence** if for every $\\varepsilon>0$ there exists $H(\\varepsilon)\\in\\mathbb{N}$ such that for all $n,m\\geq H(\\varepsilon)$, $\\lvert x_n-x_m\\rvert<\\varepsilon$.\n**English (3.5.3 / 3.5.4).** (3.5.3) A convergent sequence is a Cauchy sequence. (3.5.4) A Cauchy sequence of real numbers is **bounded**.\n**易错.** Cauchy 与收敛在 $\\mathbb{R}$ 上**等价**，但那要用完备性（卡 26）；在 $\\mathbb{Q}$ 上不成立。定义里的 $H$ 要**同时管住 $n$ 和 $m$**，不是只在\"前一项\"上成立。"}, {"id": "26", "t": "26 · 3.5.5 Cauchy 收敛判据 ★", "q": "说出条件与结论（英文原文）。", "a": "**English.** A sequence of real numbers is convergent **if and only if** it is a Cauchy sequence.\n**证明骨架.** 正向 = 3.5.3。反向：Cauchy ⇒ 有界（3.5.4）⇒ 由 **BW** 取收敛子列 $X'\\to x$ ⇒ 用 $\\lvert x_n-x\\rvert\\leq\\lvert x_n-x_{n_k}\\rvert+\\lvert x_{n_k}-x\\rvert$ 夹逼证明整列收敛到 $x$。$\\blacksquare$（**链：2.3.6 → 3.3.2 → 3.4.8 → 3.5.5**，这条链是期中证明题的主干。）\n**用途.** 不知道极限是多少时证明收敛（如 $\\sum 1/n^2$ 部分和、递推序列）——这是它相对 3.1.3 的唯一优势。"}, {"id": "27", "t": "27 · 3.5.7 / 3.5.8 压缩序列", "q": "说出条件与结论（英文原文）。", "a": "**English (3.5.7).** $X=(x_n)$ is **contractive** if there exists $C$, $0<C<1$, such that $\\lvert x_{n+2}-x_{n+1}\\rvert\\leq C\\lvert x_{n+1}-x_n\\rvert$ for all $n$.\n**English (3.5.8).** Every contractive sequence is a Cauchy sequence, and therefore is convergent.\n**用法.** 递推题的万能模板：证压缩 ⇒ 自动收敛（不用猜极限）；配合**误差估计** $C^n/(1-C)\\lvert x_2-x_1\\rvert$ 还能算到第几项。旧作业里 $x_{n+1}=\\sqrt{3+2x_n}$ 就是这一类。"}, {"id": "28", "t": "28 · 4.1.1 聚点 cluster point", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $A\\subseteq\\mathbb{R}$. A point $c\\in\\mathbb{R}$ is a **cluster point of $A$** if for every $\\delta>0$ there exists at least one point $x\\in A$, $x\\neq c$, such that $\\lvert x-c\\rvert<\\delta$.（邻域版：每个 $V_\\delta(c)$ 都含有 $A$ 中异于 $c$ 的点。）\n**易错 / 反例库.**\n- $c$ **可以不属于** $A$；即使 $c\\in A$，判聚点时也**忽略 $c$ 本身**；\n- 有限集**没有**聚点；$\\mathbb{N}$ 无限但也没有聚点；\n- $\\{1/n\\}$ 只有 $0$ 一个聚点，且 $0\\notin\\{1/n\\}$；\n- $[0,1]\\cap\\mathbb{Q}$ 的聚点是整个 $[0,1]$（用稠密性 2.4.8）。"}, {"id": "29", "t": "29 · 4.1.4 函数极限的 ε-δ 定义 ★", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $A\\subseteq\\mathbb{R}$, and let $c$ be a cluster point of $A$. For $f:A\\to\\mathbb{R}$, a real number $L$ is said to be **a limit of $f$ at $c$** if, given any $\\varepsilon>0$, there exists a $\\delta>0$ such that if $x\\in A$ and $0<\\lvert x-c\\rvert<\\delta$, then $\\lvert f(x)-L\\rvert<\\varepsilon$。（写作 $\\lim_{x\\to c}f=L$。）\n**三个给分点.** ① 前提\"$c$ 是聚点\"；② $0<\\lvert x-c\\rvert$ 即\"去心\"（$f(c)$ 无关）；③ $\\delta$ 依赖 $\\varepsilon$（写 $\\delta(\\varepsilon)$），**不依赖 $x$**。\n**配套（4.1.5 / 4.1.6）.** 极限唯一；邻域等价形式：对每个 $V_\\varepsilon(L)$ 存在 $V_\\delta(c)$，使 $x\\neq c$、$x\\in V_\\delta(c)\\cap A$ 时 $f(x)\\in V_\\varepsilon(L)$。"}, {"id": "30", "t": "30 · 4.1.8 序列判据 ★", "q": "说出条件与结论（英文原文）。", "a": "**English.** Let $f:A\\to\\mathbb{R}$ and let $c$ be a cluster point of $A$. TFAE: (i) $\\lim_{x\\to c}f=L$; (ii) for every sequence $(x_n)$ in $A$ that converges to $c$ **with $x_n\\neq c$ for all $n$**, the sequence $(f(x_n))$ converges to $L$.\n**两种用法.** 证**存在**用 (i)⇒(ii)（把函数极限变成数列极限，直接搬 Ch3 定理）；证**不存在**用逆否——找两条都趋于 $c$ 的序列使 $f(x_n)$ 的极限不同（如 $\\mathrm{sgn}(x)$ 在 $0$、$\\sin(1/x)$ 在 $0$）。\n**易错.** 必须要求 $x_n\\neq c$（漏了就等于偷偷用了 $f(c)$，错）；(ii) 是\"**每一条**序列\"，不是\"存在某一条\"。\n\n---\n\n## 附 · 考前 30 秒自检（按出现概率排序）\n\n1. **2.3.6 完备性**的三个条件（非空 / 有上界 / 在 $\\mathbb{R}$ 中）；\n2. **3.5.5 的证明链**：2.3.6 → 3.3.2 → 3.4.8 → 3.5.5；\n3. **3.1.3 与 4.1.4 的对照**（ε-K ↔ ε-δ，$K$ 与 $\\delta$ 都不许依赖\"后一项/自变量\"）；\n4. **4.1.8 序列判据**两个方向分别用来干什么；\n5. **sup 的 ε-刻画**（2.3.3–2.3.4）——求 sup 的题第一句话就是它；\n6. **反例库**：有限集无聚点、$\\mathbb{N}$ 无聚点、开区间嵌套交集为空、$\\mathbb{Q}$ 中没有 $\\sqrt2$ 的 sup、有界不收敛 $(-1)^n$、连续…（Ch5 再补）。"}];
+const KEY = 'cards:17-默写卡-Ch1-4.md';
+const CFG_KEY = KEY + ':cfg';
+const DEF_CFG = { base: 'https://api.deepseek.com', key: '', model: 'deepseek-flash', think: false };
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+
+const $ = (s) => document.querySelector(s);
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const nl2br = (s) => esc(s).replace(/\n/g, '<br>');
+
+function cfgLoad() {
+  let c = {};
+  try { c = JSON.parse(localStorage.getItem(CFG_KEY) || '{}') || {}; } catch (e) { c = {}; }
+  return Object.assign({}, DEF_CFG, c);
+}
+function cfgSave() { try { localStorage.setItem(CFG_KEY, JSON.stringify(CFG)); } catch (e) {} }
+let CFG = cfgLoad();
+
+let queue = [], pos = 0, cur = null, revealed = false, busy = false;
+let imgData = null;   // 当前这张卡已选/已拍的手写图（data URL，不落存储）
+
+function renderMD(md) {
+  const parts = [];
+  md = md.replace(/\\\[([\s\S]+?)\\\]/g, (m, t) => { parts.push({ tex: t.trim(), d: true }); return '@@M' + (parts.length - 1) + '@@'; });
+  md = md.replace(/\\\(([\s\S]+?)\\\)/g, (m, t) => { parts.push({ tex: t.trim(), d: false }); return '@@M' + (parts.length - 1) + '@@'; });
+  md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m, t) => { parts.push({ tex: t.trim(), d: true }); return '@@M' + (parts.length - 1) + '@@'; });
+  md = md.replace(/\$([^$\n]+?)\$/g, (m, t) => { parts.push({ tex: t.trim(), d: false }); return '@@M' + (parts.length - 1) + '@@'; });
+  md = esc(md);
+  md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
+  md = md.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  md = md.replace(/^- (.*)$/gm, '• $1');
+  md = md.replace(/^\s*---+\s*$/gm, '');
+  let html = md.split(/\n{2,}/).map((p) => '<p>' + p.replace(/\n/g, '<br>') + '</p>').join('');
+  html = html.replace(/@@M(\d+)@@/g, (m, i) => {
+    const p = parts[+i];
+    try { return katex.renderToString(p.tex, { displayMode: p.d, throwOnError: false }); }
+    catch (e) { return '<code>' + esc(p.tex) + '</code>'; }
+  });
+  return html;
+}
+
+/* ---------- v3：LaTeX 编辑框（按钮拼公式 + 实时预览 + 插入默写框） ---------- */
+function texMathDepth(ta) {   // 光标处是否已经在 $...$ 里（数 $ 的奇偶）
+  const before = ta.value.slice(0, ta.selectionStart);
+  return ((before.match(/(^|[^$])\$(?!\$)/g) || []).length) % 2 === 1;
+}
+function texIns(tex) {
+  const ta = $('#texSrc');
+  const s = ta.selectionStart, e = ta.selectionEnd, v = ta.value, sel = v.slice(s, e);
+  let ins = tex, caret;
+  if (sel && ins.indexOf('{}') >= 0) { ins = ins.replace('{}', '{' + sel + '}'); caret = s + ins.length; }  // 有选中 → 包进去
+  else if (ins.indexOf('{}') >= 0) { caret = s + ins.indexOf('{}') + 1; }                                    // 光标进花括号
+  else { caret = s + ins.length; }
+  ta.value = v.slice(0, s) + ins + v.slice(e);
+  ta.selectionStart = ta.selectionEnd = caret;
+  ta.focus();
+  texPvUpd();
+}
+function texPvUpd() {
+  const raw = $('#texSrc').value.trim();
+  const body = $('#texPvBody');
+  if (!raw) { body.innerHTML = '<span class="hint">拼好的公式会显示在这里</span>'; return; }
+  const t = raw.replace(/^\$\$?/, '').replace(/\$\$?$/, '').trim();
+  try { body.innerHTML = katex.renderToString(t, { displayMode: false, throwOnError: false }); }
+  catch (e) { body.textContent = raw; }
+}
+function minePvUpd() {   // 默写框内容实时渲染（$...$ 变公式），空了就收起
+  const pv = $('#minePv'), v = $('#mine').value;
+  if (!v.trim()) { pv.hidden = true; pv.innerHTML = ''; return; }
+  pv.innerHTML = renderMD(v);
+  // 有 LaTeX 命令没被 $（或 \(..\)）包起来 → 提醒（否则用户会奇怪为什么没渲染成公式）
+  const outside = v.replace(/\$\$[\s\S]*?\$\$/g, '').replace(/\$[^$\n]*?\$/g, '').replace(/\\\([\s\S]*?\\\)/g, '');
+  if (/\\[a-zA-Z]+/.test(outside)) {
+    pv.innerHTML += '<div class="hint">↑ 有一段 LaTeX 还没用 $ 括起来，所以现在只是文本。写成 $…$ 就会渲染成公式（也可以点上面的「LaTeX 编辑框」拼好再插入）</div>';
+  }
+  pv.hidden = false;
+}
+function texToMine() {
+  const tex = $('#texSrc').value.trim();
+  if (!tex) return;
+  const ta = $('#mine');
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  let ins = tex.replace(/^\$\$?/, '').replace(/\$\$?$/, '').trim();
+  if (!texMathDepth(ta)) ins = '$' + ins + '$';    // 不在 $...$ 里就自动包一层
+  // 防止与相邻的 $ 粘成 $$（$$ 会被当成 display 公式）
+  let padL = '', padR = '';
+  if (s > 0 && ta.value[s - 1] === '$') padL = ' ';
+  if (e < ta.value.length && ta.value[e] === '$') padR = ' ';
+  ta.value = ta.value.slice(0, s) + padL + ins + padR + ta.value.slice(e);
+  ta.selectionStart = ta.selectionEnd = s + padL.length + ins.length;
+  ta.focus();
+  minePvUpd();
+  $('#texSrc').value = ''; texPvUpd();             // 搬走了就清空编辑框
+}
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+function startQueue() {
+  const onlyFailed = $('#onlyFailed').checked;
+  const list = CARDS.filter((c) => (onlyFailed ? state[c.id] === 'no' : true));
+  if (!list.length) { queue = []; pos = 0; showDone(true); return; }   // 空候选：给出口，别卡住
+  queue = shuffle(list.map((c) => c.id));
+  pos = 0; revealed = false;
+  $('#card').hidden = false;
+  $('#done').hidden = true;
+  next();
+}
+
+function counts() {
+  let ok = 0, no = 0;
+  CARDS.forEach((c) => { if (state[c.id] === 'ok') ok++; else if (state[c.id] === 'no') no++; });
+  return { ok: ok, no: no, todo: CARDS.length - ok - no };
+}
+
+function paintStat() {
+  const c = counts();
+  const mode = $('#onlyFailed').checked ? '只抽 ✗（' + queue.length + ' 张）' : '全部';
+  $('#stat').innerHTML = '已通过 <b>' + c.ok + '/' + CARDS.length + '</b>　✗ 未过 <b>' + c.no + '</b>　未测 <b>' + c.todo +
+    '</b>　·　模式：' + mode + '　·　本轮 ' + (queue.length ? (pos + 1) + '/' + queue.length : 0);
+}
+
+function next() {
+  if (pos >= queue.length) { showDone(); return; }
+  cur = CARDS.find((c) => c.id === queue[pos]);
+  revealed = false;
+  imgData = null;
+  $('#done').hidden = true;
+  $('#card').hidden = false;
+  $('#num').textContent = '卡 ' + cur.t;
+  $('#q').textContent = cur.q;
+  $('#ans').innerHTML = '';
+  $('#ans').hidden = true;
+  $('#show').hidden = false;
+  $('#acts').hidden = true;
+  $('#mine').value = state['mine:' + cur.id] || '';
+  minePvUpd();
+  $('#fileImg').value = '';
+  $('#thumb').hidden = true;
+  $('#thumb').removeAttribute('src');
+  $('#ai').hidden = true;
+  $('#aiOut').hidden = true;
+  $('#aiOut').innerHTML = '';
+  $('#aiPaste').value = state['ai:' + cur.id] || '';
+  $('#aiMsg').textContent = '';
+  $('#aiMsg').className = 'stat';
+  paintStat();
+}
+
+function reveal() {
+  if (!cur || revealed) return;
+  revealed = true;
+  const mine = $('#mine').value.trim();
+  if (mine) { state['mine:' + cur.id] = mine; save(); }
+  $('#ans').innerHTML = renderMD(cur.a);
+  $('#ans').hidden = false;
+  $('#show').hidden = true;
+  $('#acts').hidden = false;
+  $('#ai').hidden = false;
+  const prev = state['ai:' + cur.id];
+  if (prev) { $('#aiOut').innerHTML = renderMD(prev); $('#aiOut').hidden = false; }
+}
+
+function mark(r) {
+  if (!cur) return;
+  if (r !== 'skip') { state[cur.id] = r; save(); }
+  pos++;
+  if (pos >= queue.length) { showDone(); paintStat(); return; }
+  next();
+}
+
+function showDone(empty) {
+  $('#card').hidden = true;
+  $('#done').hidden = false;
+  const c = counts();
+  const onlyFailed = $('#onlyFailed').checked;
+  let msg;
+  if (empty && onlyFailed) {
+    msg = '现在<b>没有「✗ 没过」的卡片</b>（✗ ' + c.no + ' 张 · 未测 ' + c.todo + ' 张），所以「只抽 ✗ 的」抽不出东西。' +
+      '<br>→ 点下面那个按钮取消它，就能从全部 ' + CARDS.length + ' 张里继续。';
+  } else if (empty) {
+    msg = '没有卡片可抽。';
+  } else {
+    msg = '本轮结束。' + (onlyFailed ? '' : '已通过 <b>' + c.ok + '/' + CARDS.length + '</b>。') +
+      (c.no ? ' 还有 <b>' + c.no + '</b> 张没过——把「只抽 ✗ 的」勾上再来一轮。'
+            : (c.todo ? ' 还有 ' + c.todo + ' 张没测。' : ' 全部通过 🎉'));
+  }
+  $('#doneMsg').innerHTML = msg;
+  $('#fallback').hidden = !(empty && onlyFailed);
+  $('#again2').hidden = !!(empty && onlyFailed);
+  paintStat();
+}
+
+/* ---------- v2：AI 判定 ---------- */
+
+function buildPrompt(c, mine) {
+  return [
+    '你是数学分析课程的助教，正在批改学生的「定理默写」。教材：Bartle & Sherbert, Introduction to Real Analysis (4th ed.)。',
+    '评分只依内容（条件、结论、量词、符号位置是否齐全），不因措辞不同或等价的符号写法扣分。',
+    '本课程期中是英文卷：学生答案若用中文写、或没能给出可直接抄上考卷的英文表述，请明确指出。',
+    '',
+    '请严格按下面四行格式作答，不要输出其它内容：',
+    '结论：正确 / 部分正确 / 不正确',
+    '漏掉的要点：（没有就写"无"）',
+    '写错的地方：（没有就写"无"）',
+    '提醒：（一句话）',
+    '',
+    '—— 题目 ——', c.q,
+    '—— 标准答案（教材口径）——', c.a,
+    '—— 学生的默写 ——', (mine && mine.trim()) ? mine : '（见附图：手写默写）'
+  ].join('\n');
+}
+
+async function callAI(prompt, img) {
+  const url = CFG.base.replace(/\/+$/, '') + '/chat/completions';
+  const content = img ? [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: img } }] : prompt;
+  const body = {
+    model: CFG.model,
+    max_tokens: CFG.think ? 4000 : (img ? 2500 : 1500),
+    messages: [{ role: 'user', content: content }]
+  };
+  // 默认关掉思考链：更快更省，而且不会出现「思考把 token 预算吃光、正文空掉」的情况
+  if (!CFG.think) body.thinking = { type: 'disabled' };
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + CFG.key },
+    body: JSON.stringify(body)
+  });
+  const txt = await r.text();
+  if (!r.ok) throw new Error('HTTP ' + r.status + '：' + txt.slice(0, 300));
+  let d;
+  try { d = JSON.parse(txt); } catch (e) { throw new Error('返回不是 JSON：' + txt.slice(0, 200)); }
+  const ch = (d.choices && d.choices[0]) || {};
+  const m = ch.message || {};
+  const body0 = ((m.content || '') + '').trim();
+  const reason = ((m.reasoning_content || '') + '').trim();
+  if (body0) {
+    if (ch.finish_reason === 'length') return body0 + '\n\n（⚠ 输出被 max_tokens 截断，可能没说完整——可在设置里把「深度思考」打开再试）';
+    return body0;
+  }
+  if (ch.finish_reason === 'length' && reason) {
+    throw new Error('模型把 token 预算全花在思考上了，被截断、没给出结论。把「深度思考」关掉再试（默认就是关的），或换模型。');
+  }
+  if (reason) return '⚠ 下面这段是模型的思考过程，不是判定结果（它没给出正式答复）：\n\n' + reason;
+  throw new Error('模型返回空内容（finish_reason=' + (ch.finish_reason || '?') + '）');
+}
+
+function shrinkImage(file, maxSide, cb) {
+  const fr = new FileReader();
+  fr.onerror = () => cb(null, '读取图片失败');
+  fr.onload = () => {
+    const im = new Image();
+    im.onerror = () => cb(null, '这张图浏览器打不开');
+    im.onload = () => {
+      const s = Math.min(1, maxSide / Math.max(im.width, im.height));
+      const cv = document.createElement('canvas');
+      cv.width = Math.max(1, Math.round(im.width * s));
+      cv.height = Math.max(1, Math.round(im.height * s));
+      cv.getContext('2d').drawImage(im, 0, 0, cv.width, cv.height);
+      cb(cv.toDataURL('image/jpeg', 0.85), null);
+    };
+    im.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+
+function aiOut(html) { $('#aiOut').innerHTML = html; $('#aiOut').hidden = false; }
+function aiMsg(t, cls) { $('#aiMsg').textContent = t; $('#aiMsg').className = 'stat ' + (cls || ''); }
+
+async function aiGrade(useImage) {
+  if (!cur || busy) return;
+  const prompt = buildPrompt(cur, $('#mine').value);
+  if (!CFG.key) {
+    aiOut('<span class="warn">还没有填 API key。</span>先展开下面的「AI 设置」填一次（只存在本机浏览器），' +
+      '或者点「复制给 AI」，把复制到的内容贴给任意 AI，再把它的答复贴回来。');
+    return;
+  }
+  if (useImage && !imgData) { aiMsg('先选一张手写照片', 'warn'); return; }
+  const mineTxt = $('#mine').value.trim();
+  if (!mineTxt && !imgData) { aiMsg('上面还没写东西——先默写点内容，或点「手写拍照 / 选图判定」选张照片', 'warn'); return; }
+  if (!mineTxt && imgData && !useImage) { aiMsg('默写框是空的；要按你拍的照片判定，请点「手写拍照 / 选图判定」', 'warn'); return; }
+  busy = true;
+  const btn = useImage ? $('#aiImg') : $('#aiGo');
+  const old = btn.textContent;
+  btn.textContent = '判定中…'; $('#aiGo').disabled = true; $('#aiImg').disabled = true;
+  aiMsg('正在请求 ' + CFG.model + ' …');
+  try {
+    const out = await callAI(prompt, useImage ? imgData : null);
+    state['ai:' + cur.id] = (useImage ? '[手写照片判定]\n' : '') + out;
+    save();
+    aiOut(renderMD(out));
+    aiMsg('✓ 已判定并存下（下次抽到这张卡会自动显示）', 'oktxt');
+  } catch (e) {
+    aiOut('<span class="notxt">判定失败：' + esc(e.message || String(e)) + '</span><br><br>' +
+      '常见原因：key 不对 / 没余额 / 没网 / 浏览器拦了跨域。<br>' +
+      '可以先点「复制给 AI」走手动路径。');
+    aiMsg('');
+  } finally {
+    busy = false;
+    btn.textContent = old; $('#aiGo').disabled = false; $('#aiImg').disabled = false;
+  }
+}
+
+function fallbackCopy(t, done) {
+  const ta = document.createElement('textarea');
+  ta.value = t; ta.style.position = 'fixed'; ta.style.top = '-9999px';
+  document.body.appendChild(ta); ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  if (ok) { done(); return; }
+  $('#aiPaste').value = t;
+  aiMsg('浏览器不让自动复制，内容已放进下面的框里，长按全选手动复制', 'warn');
+}
+
+function copyPrompt() {
+  if (!cur) return;
+  if (!$('#mine').value.trim() && !imgData) { aiMsg('上面还没写东西——先默写点内容，或选一张手写照片', 'warn'); return; }
+  const t = buildPrompt(cur, $('#mine').value);
+  const done = () => aiMsg('✓ 已复制，粘给 AI（微信里的 Hermes / DeepSeek / 豆包都行），再把答复贴到下面', 'oktxt');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done, () => fallbackCopy(t, done));
+  } else { fallbackCopy(t, done); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    localStorage.setItem(KEY + '_ping', '1');
+    localStorage.removeItem(KEY + '_ping');
+  } catch (e) { $('#storageWarn').hidden = false; }
+
+  $('#cfgBase').value = CFG.base;
+  $('#cfgKey').value = CFG.key;
+  $('#cfgModel').value = CFG.model;
+  $('#cfgThink').checked = !!CFG.think;
+
+  $('#onlyFailed').addEventListener('change', startQueue);
+  $('#show').addEventListener('click', reveal);
+  $('#again').addEventListener('click', startQueue);
+  $('#again2').addEventListener('click', startQueue);
+  $('#fallback').addEventListener('click', () => { $('#onlyFailed').checked = false; startQueue(); });
+  $('#reset').addEventListener('click', () => {
+    if (confirm('清空全部 ✓/✗ 记录？（默写内容和 AI 判定也会一起清掉）')) { state = {}; save(); startQueue(); }
+  });
+  document.querySelectorAll('#acts button').forEach((b) => b.addEventListener('click', () => mark(b.dataset.r)));
+
+  $('#mine').addEventListener('blur', () => {
+    if (!cur) return;
+    const v = $('#mine').value.trim();
+    if (v) { state['mine:' + cur.id] = v; save(); }
+  });
+
+  $('#aiGo').addEventListener('click', () => aiGrade(false));
+  $('#aiImg').addEventListener('click', () => $('#fileImg').click());
+  $('#fileImg').addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    aiMsg('正在压缩图片…');
+    shrinkImage(f, 1400, (data, err) => {
+      if (!data) { aiMsg(err || '图片处理失败', 'warn'); return; }
+      imgData = data;
+      $('#thumb').src = data; $('#thumb').hidden = false;
+      aiMsg('图片就绪，点「手写拍照 / 选图判定」开始', 'oktxt');
+    });
+  });
+  $('#copyP').addEventListener('click', copyPrompt);
+  $('#aiSave').addEventListener('click', () => {
+    if (!cur) return;
+    const v = $('#aiPaste').value.trim();
+    state['ai:' + cur.id] = v;
+    save();
+    aiOut(v ? renderMD(v) : '<span class="warn">（已清空这张卡的判定）</span>');
+    aiMsg('✓ 已存到这张卡', 'oktxt');
+  });
+
+  $('#saveCfg').addEventListener('click', () => {
+    CFG.base = $('#cfgBase').value.trim() || DEF_CFG.base;
+    CFG.key = $('#cfgKey').value.trim();
+    CFG.model = $('#cfgModel').value.trim() || DEF_CFG.model;
+    CFG.think = $('#cfgThink').checked;
+    cfgSave();
+    aiMsg(CFG.key ? '✓ 设置已保存到本机浏览器' : '已保存（没填 key，只能用「复制给 AI」）', 'oktxt');
+  });
+
+  $('#testCfg').addEventListener('click', async () => {
+    const b = $('#testCfg');
+    CFG.base = $('#cfgBase').value.trim() || DEF_CFG.base;
+    CFG.key = $('#cfgKey').value.trim();
+    CFG.model = $('#cfgModel').value.trim() || DEF_CFG.model;
+    CFG.think = $('#cfgThink').checked;
+    cfgSave();
+    if (!CFG.key) { aiMsg('先填 key 再测', 'warn'); return; }
+    b.disabled = true; aiMsg('测试中…');
+    try {
+      const out = await callAI('只回两个字：可以', null);
+      aiMsg('✓ 连接正常，模型回了：' + out.slice(0, 40), 'oktxt');
+    } catch (e) {
+      aiMsg('✗ ' + (e.message || String(e)).slice(0, 200), 'notxt');
+    } finally { b.disabled = false; }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); reveal(); }
+    else if (e.key === '1') mark('ok');
+    else if (e.key === '2') mark('no');
+    else if (e.key === '3') mark('skip');
+  });
+  // v3：LaTeX 编辑框 + 默写实时预览
+  document.querySelectorAll('#texWrap button[data-tex]').forEach((b) => b.addEventListener('click', () => texIns(b.dataset.tex)));
+  $('#texSrc').addEventListener('input', texPvUpd);
+  $('#texSrc').addEventListener('keydown', (e) => { if (e.key === 'Tab') { e.preventDefault(); texIns('  '); } });
+  $('#texToMine').addEventListener('click', texToMine);
+  $('#texClear').addEventListener('click', () => { $('#texSrc').value = ''; texPvUpd(); $('#texSrc').focus(); });
+  $('#mine').addEventListener('input', minePvUpd);
+  $('#texWrap').addEventListener('toggle', () => { try { localStorage.setItem(KEY + ':texopen', $('#texWrap').open ? '1' : '0'); } catch (e) {} });
+  try { const _tv = localStorage.getItem(KEY + ':texopen'); if (_tv === '1') $('#texWrap').open = true; else if (_tv === '0') $('#texWrap').open = false; } catch (e) {}
+  startQueue();
+});
+</script>
+</body>
+</html>
